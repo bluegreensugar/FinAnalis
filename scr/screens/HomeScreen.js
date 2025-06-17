@@ -1,6 +1,10 @@
 import React from 'react';
 import { SectionList, View, Button, Text, Image, ScrollView, TextInput, StyleSheet} from 'react-native';
-
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 const DATA = [
@@ -51,7 +55,11 @@ const DATA = [
 ];
 
 
+
 const HomePage = () => {
+
+  const navigation = useNavigation();
+
   return (
   <View
     style={styles.mainView}>
@@ -61,7 +69,7 @@ const HomePage = () => {
             Мои расходы </Text>
            <Button 
               title="+" 
-              onPress={() => alert('Добавить окно новых покупок')}
+              onPress={() => navigation.navigate('AddExp')}
               color='#add8e6' /> 
       </View>
         <SectionList style ={{ borderRadius:10, 
