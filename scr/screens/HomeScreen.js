@@ -1,11 +1,9 @@
 import React from 'react';
-import { SectionList, View, Button, Text, Image, ScrollView, TextInput, StyleSheet} from 'react-native';
-import {
-  createStaticNavigation,
-  useNavigation,
-} from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import { View, StyleSheet} from 'react-native';
+import ItemList from '../components/ItemList';
+import Header from '../components/Header';
+import SetButton from '../components/SetButton';
+import { useNavigation } from '@react-navigation/native';
 
 const DATA = [
   {
@@ -57,103 +55,47 @@ const DATA = [
 
 
 const HomePage = () => {
-
   const navigation = useNavigation();
 
   return (
-  <View
-    style={styles.mainView}>
-      <View style={styles.mainRow}>
-        <Text
-            style ={styles.mainText}> 
-            Мои расходы </Text>
-           <Button 
-              title="+" 
-              onPress={() => navigation.navigate('AddExp')}
-              color='#add8e6' /> 
+    <View style={styles.container}>
+      <View style={styles.list}>
+        <Header />
+        <ItemList data={DATA} />
       </View>
-        <SectionList style ={{ borderRadius:10, 
-            borderColor: '#add8e6',
-            borderWidth:2
-         }}
+      <View style={styles.button}>
+        <SetButton
+          title={"Анализ"}
+          onPress={() => navigation.navigate('Analytics')}
+        />
         
-          sections={DATA}
-          renderItem = {({item}) => (
-            <View style={styles.productRow}>
-              <View style={styles.textBlock}>
-                <Text style={styles.nameText}>{item.name}</Text>
-                <Text style={styles.categoryText}>{item.category}</Text>
-              </View>
-              <Text style={styles.priceText}>{item.cost} руб.</Text>
-            </View>)}
-          renderSectionHeader={
-            ({section:{title}})=>(
-              <View style={styles.viewSectionHeader}>
-                <Text style={styles.text}>{title}</Text>
-              </View>
-          )
-          }
-        >
-          
-        </SectionList>
-
-  </View>
-
+      </View>
+      <View style={styles.button}>
+       
+        <SetButton
+          title={"Настройки"}
+          onPress={() => navigation.navigate('Sttngs')}
+        />
+      </View>
+    </View>
   );
 };
 
-
-const styles = StyleSheet.create(
-{
-  mainText:{
-    color:'#add8e6',
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-
-  mainView:{
-    marginTop:50,
-    marginLeft:20,
-    marginRight:20,
-
-  },
-  mainRow: {
-    flexDirection: 'row',
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, 
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
     justifyContent: 'space-between', 
-    alignItems: 'center',
   },
-  viewSectionHeader:{
-    backgroundColor:'#FFF',
-    
+  list: {
+    flex: 1,
+    paddingBottom: 40, 
   },
-  productRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    backgroundColor: '#add8e6',
-    borderBottomWidth: 1,
-    borderBottomColor: '#fff',
+  button: {
+    marginTop: 10,
   },
-  textBlock: {
-    flexShrink: 1, 
-    marginRight: 10,
-  },
-  nameText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-  },
-  categoryText: {
-    fontSize: 14,
-    color: '#665',
-  },
-  priceText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#FFF',
-  },
-  }
-)
+});
+
 export default HomePage;
