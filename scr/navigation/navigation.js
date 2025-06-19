@@ -3,7 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomePage from '../screens/HomeScreen.js';
 import AddNewExpenses from '../screens/AddNewExpensesScreen.js'
-
+import AnalyticsPage from '../screens/AnalyticsScreen.js'
+import SettingsPage from '../screens/SettingsScreen.js'
 
 const RootStack = createNativeStackNavigator({
   screens: {
@@ -11,10 +12,27 @@ const RootStack = createNativeStackNavigator({
       screen:HomePage,
       options: {
         title: 'Главное окно',
-      
       },
     } ,
-    AddExp:AddNewExpenses
+    AddExp: {
+      screen:AddNewExpenses,
+      options: {
+        title: 'Добавить траты',
+      },
+    } ,
+    Analytics: {
+      screen:AnalyticsPage,
+      options: {
+        title: 'Добавить траты',
+      },
+    } ,
+   Sttngs: {
+      screen:SettingsPage,
+      options: {
+        title: 'Добавить траты',
+      },
+    } ,
+    Sttngs:SettingsPage,
   },
 });
 
