@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 
-const AnalyticsPage =()=>{
+const AnalyticsScreen =()=>{
  
     return(
         <View>
@@ -16,4 +16,4 @@ const AnalyticsPage =()=>{
     );
 }; 
 
-export default AnalyticsPage;
+export default AnalyticsScreen;

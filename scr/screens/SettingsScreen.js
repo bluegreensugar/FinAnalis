@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import PickerField from '../components/PickerField';
 import SetButton from '../components/SetButton';
 
-const SettingsPage =()=>{
+const SettingsScreen =()=>{
     return(
         <View style={styles.container}>
             <PickerField
@@ -22,7 +22,6 @@ const SettingsPage =()=>{
     );
 }; 
 
-export default SettingsPage;
 
 const styles = StyleSheet.create({
   container: {
@@ -39,3 +38,5 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
+
+export default SettingsScreen;

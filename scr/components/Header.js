@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import SetButton from '../components/SetButton';
 
-const SectionHeader = () => {
+const Header = () => {
   const navigation = useNavigation();
   return(
     <View style={styles.mainRow}>
@@ -12,7 +12,7 @@ const SectionHeader = () => {
         Мои расходы </Text>
       <SetButton 
         title="+" 
-        onPress={() => navigation.navigate('AddExp')} 
+        onPress={() => navigation.navigate('AddExpenses')} 
       /> 
     </View>
   )
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SectionHeader;
+export default Header;

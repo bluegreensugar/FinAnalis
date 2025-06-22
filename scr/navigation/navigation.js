@@ -1,38 +1,37 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import HomePage from '../screens/HomeScreen.js';
-import AddNewExpenses from '../screens/AddNewExpensesScreen.js'
-import AnalyticsPage from '../screens/AnalyticsScreen.js'
-import SettingsPage from '../screens/SettingsScreen.js'
+import HomeScreen from '../screens/HomeScreen.js';
+import AddNewExpensesScreen from '../screens/AddNewExpensesScreen.js'
+import AnalyticsScreen from '../screens/AnalyticsScreen.js'
+import SettingsScreen from '../screens/SettingsScreen.js'
 
 const RootStack = createNativeStackNavigator({
   screens: {
     Home: {
-      screen:HomePage,
+      screen:HomeScreen,
       options: {
         title: 'Главное окно',
       },
     } ,
-    AddExp: {
-      screen:AddNewExpenses,
+    AddExpenses: {
+      screen:AddNewExpensesScreen,
       options: {
         title: 'Добавить траты',
       },
     } ,
     Analytics: {
-      screen:AnalyticsPage,
+      screen:AnalyticsScreen,
       options: {
-        title: 'Добавить траты',
+        title: 'Аналитика',
       },
     } ,
-   Sttngs: {
-      screen:SettingsPage,
+   Settings: {
+      screen:SettingsScreen,
       options: {
-        title: 'Добавить траты',
+        title: 'Настройки',
       },
     } ,
-    Sttngs:SettingsPage,
   },
 });
 

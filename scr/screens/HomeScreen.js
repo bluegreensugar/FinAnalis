@@ -54,7 +54,7 @@ const DATA = [
 
 
 
-const HomePage = () => {
+const HomeScreen = () => {
   const navigation = useNavigation();
 
   return (
@@ -74,7 +74,7 @@ const HomePage = () => {
        
         <SetButton
           title={"Настройки"}
-          onPress={() => navigation.navigate('Sttngs')}
+          onPress={() => navigation.navigate('Settings')}
         />
       </View>
     </View>
@@ -98,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomePage;
+export default HomeScreen;

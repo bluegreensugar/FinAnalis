@@ -1,5 +1,6 @@
 import React from 'react';
 import { SectionList, View, Text, StyleSheet} from 'react-native';
+import FormatPrice from '../utils/FormatPrice';
 
 const ItemList = ({data}) => {
   return (
@@ -13,7 +14,7 @@ const ItemList = ({data}) => {
             <Text style={styles.nameText}>{item.name}</Text>
             <Text style={styles.categoryText}>{item.category}</Text>
           </View>
-          <Text style={styles.priceText}>{item.cost} руб.</Text>
+          <Text style={styles.priceText}>{FormatPrice(item.cost, 'RUB', 'ru-RU')}</Text>
         </View>)}
       renderSectionHeader={
         ({section:{title}})=>(

@@ -5,7 +5,7 @@ import TextInputField from '../components/TextInputField';
 import PickerField from '../components/PickerField';
 import SetButton from '../components/SetButton';
 
-const AddNewExpenses = () => {
+const AddNewExpensesScreen = () => {
 
   return (
     <View style={styles.container}>
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddNewExpenses;
+export default AddNewExpensesScreen;
