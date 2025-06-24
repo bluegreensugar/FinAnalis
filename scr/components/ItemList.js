@@ -4,7 +4,7 @@ import FormatPrice from '../utils/FormatPrice';
 
 const ItemList = ({data}) => {
   return (
-  <View >
+  
     <SectionList 
       sections={data}
       keyExtractor={(item, index) => item+index}
@@ -14,7 +14,7 @@ const ItemList = ({data}) => {
             <Text style={styles.nameText}>{item.name}</Text>
             <Text style={styles.categoryText}>{item.category}</Text>
           </View>
-          <Text style={styles.priceText}>{FormatPrice(item.cost, 'RUB', 'ru-RU')}</Text>
+          <Text style={styles.priceText}>{FormatPrice(item.cost,  item.currency)}</Text>
         </View>)}
       renderSectionHeader={
         ({section:{title}})=>(
@@ -24,7 +24,7 @@ const ItemList = ({data}) => {
         ) 
       }
     />
-  </View>    
+    
 
   );
 };
@@ -32,10 +32,6 @@ const ItemList = ({data}) => {
 
 const styles = StyleSheet.create(
 {
-  new:{
-    flex:1
-  },
-  
   productRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',

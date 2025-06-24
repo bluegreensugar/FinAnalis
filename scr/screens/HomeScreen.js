@@ -1,74 +1,39 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, StyleSheet} from 'react-native';
 import ItemList from '../components/ItemList';
 import Header from '../components/Header';
 import SetButton from '../components/SetButton';
-import { useNavigation } from '@react-navigation/native';
-
-const DATA = [
-  {
-    title: '14.06.25',
-    data: [
-     { name:'Вода', category:'еда', cost: '10'},
-     { name:'Хлеб', category:'еда', cost: '50'},
-     { name:'Гематоген', category:'здоровье', cost: '80'},
-    ],
-
-  },
-  {
-    title: '14.06.25',
-    data: [
-     { name:'Вода', category:'еда', cost: '10'},
-     { name:'Хлеб', category:'еда', cost: '50'},
-     { name:'Гематоген', category:'здоровье', cost: '80'},
-    ],
-
-  },
-  {
-    title: '14.06.25',
-    data: [
-     { name:'Вода', category:'еда', cost: '10'},
-     { name:'Хлеб', category:'еда', cost: '50'},
-     { name:'Гематоген', category:'здоровье', cost: '80'},
-    ],
-
-  },
-  {
-    title: '14.06.25',
-    data: [
-     { name:'Вода', category:'еда', cost: '10'},
-     { name:'Хлеб', category:'еда', cost: '50'},
-     { name:'Гематоген', category:'здоровье', cost: '80'},
-    ],
-
-  },
-  {
-    title: '12.06.25',
-    data: [
-     { name:'шампунь', category:'красота', cost: '679'},
-     { name:'зубная щетка', category:'бытовые товары' , cost: '200'},
-    ],
-  },
-  
-];
-
-
+import { useNavigation, useFocusEffect  } from '@react-navigation/native';
+import storage from '../storage/Storage';
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
+const navigation = useNavigation();
+  const [data, setData] = useState([]);
+
+  const loadExpenses = useCallback(() => {
+    const massExpenses = storage.getString('expenses');
+    const expenses = massExpenses ? JSON.parse(massExpenses) : [];
+    setData(expenses); 
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadExpenses();
+    }, [loadExpenses])
+  );
+
 
   return (
     <View style={styles.container}>
       <View style={styles.list}>
         <Header />
-        <ItemList data={DATA} />
+        <ItemList data={data} />
       </View>
       <View style={styles.button}>
         <SetButton
           title={"Анализ"}
           onPress={() => navigation.navigate('Analytics')}
         />
-        
       </View>
       <View style={styles.button}>
        
@@ -91,7 +56,7 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    paddingBottom: 40, 
+    paddingBottom: 10, 
   },
   button: {
     marginTop: 10,
