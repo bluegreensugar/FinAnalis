@@ -5,13 +5,17 @@ import PickerField from '../components/PickerField';
 import SetButton from '../components/SetButton';
 import { useNavigation } from '@react-navigation/native';
 import storage from '../storage/Storage';
+import { useMMKVString, useMMKVObject } from 'react-native-mmkv';
 
 const AddNewExpensesScreen = () => {
 
-const [name, setName] = useState('');
-const [category, setCategory]=useState('food');
-const [cost, setCost] =useState('');
-const [currency, setCurrency] = useState('ru-RU');
+const [name, setName] = useMMKVString('name');
+const [category='food', setCategory]=useMMKVString('category');
+const [cost, setCost] =useMMKVString('cost');
+const [currency='ru-RU', setCurrency] = useMMKVString('currency');
+
+const [expenses, setExpenses] = useMMKVObject('expenses'); 
+
 const navigation = useNavigation();
 
   const saveExpense=()=>{
@@ -27,25 +31,31 @@ const navigation = useNavigation();
         currency: currency,
         date: new Date().toLocaleDateString('ru-RU'),
       };
-      
+     
       const dateExpenses = newExpense.date;
-      const massExpenses = storage.getString('expenses'); 
-      let expenses = massExpenses ? JSON.parse(massExpenses) : [];
+     
+      let curExpenses = expenses ? expenses : [];
 
-      let expense = expenses.find((s) => s.title == dateExpenses);
+      let expense = curExpenses.find((s) => s.title == dateExpenses);
       if (!expense) {
         expense = { title: dateExpenses, data: [] };
-        expenses.push(expense);
+        curExpenses.push(expense);
       }
       expense.data.push(newExpense);
 
-      storage.set('expenses', JSON.stringify(expenses));
-      Alert.alert('Готово!', 'Транзакция успешно добавлена.');
+      setExpenses(curExpenses);
+      Alert.alert('Транзакция успешно добавлена');
+      setName('');
+      setCategory('food');
+      setCurrency('ru-RU');
+      setCost('');
+    
+  
       navigation.goBack();
     }
     else 
     { 
-      storage.clearAll();
+      //storage.clearAll();
       Alert.alert('Ошибка, заполните наименование и сумму');
       return;
     }

@@ -5,29 +5,17 @@ import Header from '../components/Header';
 import SetButton from '../components/SetButton';
 import { useNavigation, useFocusEffect  } from '@react-navigation/native';
 import storage from '../storage/Storage';
+import { useMMKVObject } from 'react-native-mmkv';
 
 const HomeScreen = () => {
-const navigation = useNavigation();
-  const [data, setData] = useState([]);
-
-  const loadExpenses = useCallback(() => {
-    const massExpenses = storage.getString('expenses');
-    const expenses = massExpenses ? JSON.parse(massExpenses) : [];
-    setData(expenses); 
-  }, []);
-
-  useFocusEffect(
-    useCallback(() => {
-      loadExpenses();
-    }, [loadExpenses])
-  );
-
-
+  const navigation = useNavigation();
+  const [expenses] = useMMKVObject('expenses'); 
+  
   return (
     <View style={styles.container}>
       <View style={styles.list}>
         <Header />
-        <ItemList data={data} />
+        <ItemList data={expenses||[]} />
       </View>
       <View style={styles.button}>
         <SetButton
